@@ -24,6 +24,10 @@ struct Config {
 
 impl Config {
     fn new(args: &[String]) -> Self {
+        if args.len() < 3 {
+            panic!("not enough arguments");
+        }
+
         let query = args[1].clone();
         let file_path = args[2].clone();    
 
@@ -31,6 +35,17 @@ impl Config {
         //     query, file_path        
         // }
         Config { query: query, file_path: file_path }
+    }
+
+    fn build(args: &[String]) -> Result<Config, &'ststic str> {
+        if args.len() != 3 {
+            return Err("Not enough arguments");
+        }
+
+        let query = args[1].clone();
+        let file_path = args[2].clone();
+        
+        Ok(Config{query, file_path})
     }
 }
 
